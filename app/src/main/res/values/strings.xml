@@ -1,0 +1,4 @@
+<resources>
+    <string name="internet">No Internet connection, Please make sure your device is connected to the internet</string>
+    <string name="app_name">My GitHUbApiApp</string>
+</resources>
