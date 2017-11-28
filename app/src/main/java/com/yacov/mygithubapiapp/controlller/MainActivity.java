@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +25,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private TextView Disconnected;
     private Item item;
     ProgressDialog pd;
     private SwipeRefreshLayout swipeContainer;
+    private EditText search;
+    public String loca = "brazil";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainerID);
 
@@ -53,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-//        pd = new ProgressDialog(this);
-//        pd.setMessage("Fetching Data");
-//        pd.setCancelable(false);
-//        pd.show();
+        pd = new ProgressDialog(this);
+        pd.setMessage("Fetching Data");
+        pd.setCancelable(false);
+        pd.show();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewID);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.smoothScrollToPosition(0);
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setAdapter(new ItemAdapter(getApplicationContext(), items));
                     recyclerView.smoothScrollToPosition(0);
                     swipeContainer.setRefreshing(false);
-                   // pd.hide();
+                    pd.hide();
                 }
 
                 @Override
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("Error", t.getMessage());
                     Toast.makeText(MainActivity.this, "Error Fetching Data!", Toast.LENGTH_SHORT).show();
                     Disconnected.setVisibility(View.VISIBLE);
-                   // pd.hide();
+                    pd.hide();
                 }
             });
 
@@ -97,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
 
         }
+
+    }
+
+    public void searchClick(View view){
+
+        search = (EditText) findViewById(R.id.edtSearchID);
+        loca = search.getText().toString();
+        loadJson();
 
     }
 

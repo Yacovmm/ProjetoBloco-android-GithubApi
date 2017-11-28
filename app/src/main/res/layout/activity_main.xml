@@ -21,6 +21,8 @@
             android:layout_weight="5"
             android:hint="Ex: Brazil..."
             android:textSize="15sp"
+            android:id="@+id/edtSearchID"
+            android:focusable="auto"
             />
 
         <ImageView
@@ -30,6 +32,7 @@
             android:fitsSystemWindows="true"
             android:focusableInTouchMode="true"
             android:scaleType="fitXY"
+            android:onClick="searchClick"
             />
 
 

@@ -94,7 +94,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                         intent.putExtra("avatar_url", items.get(position).getAvatarUrl());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
-                        Toast.makeText(v.getContext(), "You clicked" + clickdDataItem.getLogin(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "User: " + clickdDataItem.getLogin(), Toast.LENGTH_SHORT).show();
 
                     }
                 }
